@@ -1,0 +1,4025 @@
+{
+	"info": {
+		"_postman_id": "79845795-d34b-46db-b1c6-9f6ae936fb90",
+		"name": "Calculator soap api",
+		"description": "\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30835307",
+		"_collection_link": "https://winter-crescent-140642.postman.co/workspace/comcast-testing-sample~5a122710-c425-4afb-963b-5fc96aa6b888/collection/30835307-79845795-d34b-46db-b1c6-9f6ae936fb90?action=share&source=collection_link&creator=30835307"
+	},
+	"item": [
+		{
+			"name": "smoke kc",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"AddResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>82</intA>\n      <intB>10</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SubtractResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>{{varA}}</intA>\n      <intB>{{varB}}</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"MultiplyResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>100</intA>\n      <intB>5</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"DivideResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>100</intA>\n      <intB>20</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "smoke Testing",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"AddResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{$randomUserAgent}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{VarA}}</intA>\n      <intB>{{VarB}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SubtractResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							},
+							{
+								"key": "User-Agent",
+								"value": "{{$randomUserAgent}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>{{VarA}}</intA>\n      <intB>{{VarB}}</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"MultiplyResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>{{VarA}}</intA>\n      <intB>{{VarB}}</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"DivideResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>{{VarA}}</intA>\n      <intB>{{VarB}}</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "regression testing",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA></intA>\n      <intB>{{$randomInt}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Add content type html",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/html"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Add content type json",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 4xx\", function () {\r",
+									"    pm.response.to.be.clientError;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>100.0</intA>\n      <intB>10.0</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "smoke TC-using INTEROPERABILITY",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"AddResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SubtractResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"MultiplyResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"DivideResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "smoke TC-Performance Testing",
+			"item": [
+				{
+					"name": "Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"AddResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SubtractResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"MultiplyResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"DivideResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>{{$randomInt}}</intA>\n      <intB>{{$randomInt}}</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "negative testing",
+			"item": [
+				{
+					"name": "Add Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"AddResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Add"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>82</intA>\n      <intB>10</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						},
+						"description": "Adds two integers. This is a test WebService. ©DNE Online"
+					},
+					"response": [
+						{
+							"name": "Add response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Add"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Add xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Add>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:AddResponse xmlns=\"http://tempuri.org/\">\n      <tns:AddResult>100</tns:AddResult>\n    </tns:AddResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Subtract Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"SubtractResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Subtract"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Subtract xmlns=\"http://tempuri.org/\">\n      <intA>100</intA>\n      <intB>20</intB>\n    </Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Subtract response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Subtract"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Subtract xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Subtract>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:SubtractResponse xmlns=\"http://tempuri.org/\">\n      <tns:SubtractResult>100</tns:SubtractResult>\n    </tns:SubtractResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Multiply Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"MultiplyResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Multiply"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>100</intA>\n      <intB>5</intB>\n    </Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Multiply response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Multiply"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Multiply xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Multiply>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:MultiplyResponse xmlns=\"http://tempuri.org/\">\n      <tns:MultiplyResult>100</tns:MultiplyResult>\n    </tns:MultiplyResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				},
+				{
+					"name": "Divide Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if response code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if body response present\", function () {\r",
+									"    pm.response.to.have.a.body();\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if addresult present\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"DivideResult\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"text/xml; charset=utf-8\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Security testing\r",
+									"\r",
+									"pm.test(\"response not have a server\", function () {\r",
+									"    pm.response.to.not.have.header(\"Server\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a x-powered-by\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-AspNet-Version\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-AspNet-Version\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response not have a X-Powered-By-Plesk\", function () {\r",
+									"    pm.response.to.not.have.header(\"X-Powered-By-Plesk\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "http://tempuri.org/Divide"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Divide xmlns=\"http://tempuri.org/\">\n      <intA>100</intA>\n      <intB>20</intB>\n    </Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CalculatorSoapBaseUrl}}/calculator.asmx",
+							"host": [
+								"{{CalculatorSoapBaseUrl}}"
+							],
+							"path": [
+								"calculator.asmx"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Divide response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8"
+									},
+									{
+										"key": "SOAPAction",
+										"value": "http://tempuri.org/Divide"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:Divide xmlns=\"http://tempuri.org/\">\n      <tns:intA>100</tns:intA>\n      <tns:intB>100</tns:intB>\n    </tns:Divide>\n  </soap:Body>\n</soap:Envelope>\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://www.dneonline.com/calculator.asmx",
+									"protocol": "http",
+									"host": [
+										"www",
+										"dneonline",
+										"com"
+									],
+									"path": [
+										"calculator.asmx"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/xml; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:DivideResponse xmlns=\"http://tempuri.org/\">\n      <tns:DivideResult>100</tns:DivideResult>\n    </tns:DivideResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "computer",
+			"item": [
+				{
+					"name": "https://computer-database.gatling.io/computers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "host",
+								"value": "computer-database.gatling.io"
+							},
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "Upgrade-Insecure-Requests",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://computer-database.gatling.io/computers",
+							"protocol": "https",
+							"host": [
+								"computer-database",
+								"gatling",
+								"io"
+							],
+							"path": [
+								"computers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://computer-database.gatling.io/computers/{{param1}}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "host",
+								"value": "computer-database.gatling.io"
+							},
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "Upgrade-Insecure-Requests",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "https://computer-database.gatling.io/computers/381",
+							"protocol": "https",
+							"host": [
+								"computer-database",
+								"gatling",
+								"io"
+							],
+							"path": [
+								"computers",
+								"381"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://computer-database.gatling.io/computers/{{param1}}/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "host",
+								"value": "computer-database.gatling.io"
+							},
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "Upgrade-Insecure-Requests",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://computer-database.gatling.io/computers/381/delete",
+							"protocol": "https",
+							"host": [
+								"computer-database",
+								"gatling",
+								"io"
+							],
+							"path": [
+								"computers",
+								"381",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://computer-database.gatling.io/computers/new",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "host",
+								"value": "computer-database.gatling.io"
+							},
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "Upgrade-Insecure-Requests",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "https://computer-database.gatling.io/computers/new",
+							"protocol": "https",
+							"host": [
+								"computer-database",
+								"gatling",
+								"io"
+							],
+							"path": [
+								"computers",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://computer-database.gatling.io/computers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "host",
+								"value": "computer-database.gatling.io"
+							},
+							{
+								"key": "Accept",
+								"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "Upgrade-Insecure-Requests",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "https://computer-database.gatling.io/computers",
+							"protocol": "https",
+							"host": [
+								"computer-database",
+								"gatling",
+								"io"
+							],
+							"path": [
+								"computers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "computer-database.gatling.io",
+			"item": []
+		},
+		{
+			"name": "New Folder",
+			"item": []
+		},
+		{
+			"name": "https://katalon-demo-cura.herokuapp.com/authenticate.php",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en;q=0.9,en-GB;q=0.8,en-US;q=0.7,ta;q=0.6"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cookie",
+						"value": "PHPSESSID=9g6ro2a77u1pi9lrh6pc1vpcc3ntpfgr"
+					},
+					{
+						"key": "Origin",
+						"value": "https://katalon-demo-cura.herokuapp.com"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Referer",
+						"value": "https://katalon-demo-cura.herokuapp.com/profile.php"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "document"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "navigate"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-User",
+						"value": "?1"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "John Doe",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ThisIsNotAPassword",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://katalon-demo-cura.herokuapp.com/authenticate.php",
+					"protocol": "https",
+					"host": [
+						"katalon-demo-cura",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"authenticate.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book an appointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en;q=0.9,en-GB;q=0.8,en-US;q=0.7,ta;q=0.6"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cookie",
+						"value": "PHPSESSID=9g6ro2a77u1pi9lrh6pc1vpcc3ntpfgr"
+					},
+					{
+						"key": "Origin",
+						"value": "https://katalon-demo-cura.herokuapp.com"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Referer",
+						"value": "https://katalon-demo-cura.herokuapp.com/"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "document"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "navigate"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-User",
+						"value": "?1"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "facility",
+							"value": "Hongkong CURA Healthcare Center",
+							"type": "text"
+						},
+						{
+							"key": "hospital_readmission",
+							"value": "Yes",
+							"type": "text"
+						},
+						{
+							"key": "programs",
+							"value": "Medicare",
+							"type": "text"
+						},
+						{
+							"key": "visit_date",
+							"value": "30/11/2023",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "casual checkup",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://katalon-demo-cura.herokuapp.com/appointment.php",
+					"protocol": "https",
+					"host": [
+						"katalon-demo-cura",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"appointment.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xcloud",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en;q=0.9"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Cookie",
+						"value": "x-ms-gateway-slice=estsfd; stsservicecookie=estsfd; AADSSO=NA|NoExtension; SSOCOOKIEPULLED=1; esctx-XRxYZPQaTM=AQABAAEAAAAmoFfGtYxvRrNriQdPKIZ-5VUYdircPqMjrJBUWp3nOezFXvHFaZotS35xjnxirnZDezQ3BMn5QUhi10nFDEr7j2vwawXcPT0Fc7QlCFtA7RICdWwb2ZFimJqgoQSnln7sc44ik0hl9wxc2GVgB5Fzx1n8w1smmg3KGhlArv8QPyAA; brcap=0; wlidperf=FR=L&ST=1701153575269; ESTSAUTHLIGHT=+650ec8d4-0fac-49a4-8591-86e5191fdbf3; esctx=PAQABAAEAAAAmoFfGtYxvRrNriQdPKIZ-t_lOGKDZX7MAaumhu7ahyMLZ2A4_Y05s0He-3MX8FV8kNraki2ugv_h7d5xefAiw4A4b4lB-JdJUqk2i2iWm7_f2-1gpc69_cxiHOVVTFIadej1cEn3gCT6046MMMZPXqtOtJqs6ZV5nj9DbwwxmAoV8kHKLDTwdSkmjIKKfeqEgAA; esctx-Q7LkwRbpQok=AQABAAEAAAAmoFfGtYxvRrNriQdPKIZ-p9Uae_TBPtLdr4lVcr2EX3_Hw7fvH2CqszwyGw-Iz10zqeMoVVvjs_jwt1dowfWc4NjMLshquvSJ7DWCzL7JTzKyrL-NbdcWwK3VDdpq1VogtmsikLwZfsL4sd_AvPbZe6rBfajY62HqUAnPwob3CyAA; ESTSAUTHPERSISTENT=0.AQ0A6e9qkKd2ZU-4LV7CB3XVqnEiEWEF0itLoSw4LxnuvRENAP0.AgABAAQAAAAmoFfGtYxvRrNriQdPKIZ-AgDs_wUA9P9hq8T0fi0g8Zc9nDFf1Se715xD2OXzaRtfovEo5OjEscg-rOAFwq5IunZhh7Ig6tm8X3I_99POvYUvp_J7FLi4Dym4Rp2Xh2S2OVuaDfWckZmoFEpWu0onQIUbdEg3SIJs9Qq42PBOAeKrmbYmWhKjg_KxY-le3Jjc0n5a7Zq90DhQOT77wzr2EbxaPQBPdqXyrE1PrRBWJpLGHi-0FX6qX95f_W3ftDUNWgmgD3hl6lE_wTpOSt2v9FV5FzF_CfbwlkpZToPhpvojWb0LrUXNC7Bl9rMs-T4trBBRr6DOy9FsKfTH4eOX5OcdDSEn8APnvmXHwWfsEY5c5fCzhdB-DwZjwIsWYrbhDgSH-gM1JNqFG631D_59Zzo1FRlzagNLr3rhO3eXlO-VhccGXvg1mSfE9HlQhfzZpAO5FmsLxcU1FwVVychFgX3p_ar_KFdkk_Iju5ibDUZFmeTtXE6608m7CcMi-wicH2F8JO-RMIsqN2JsH1MGrDVvj4--aU9uh6ljA_9Jh1sQ9esNZN-DY-u51bII3tc4tEcHQtmnr7kZP4FqIIUehQqnxcchthKcYc3bOk8to3mjIGQFVrekQn7LP5uXK6NyV2mjzHViR_sOUJKda1n9lIcCJ32yYkY772fBk_E-QWhjLjg_k72rI6HmcabHVXXzSTLta2QuXQDFFV4mx9BNbJFg8mIe1Jeq8yMsRUfQvhraOHvhzQ3Z3kRT; ESTSAUTH=0.AQ0A6e9qkKd2ZU-4LV7CB3XVqnEiEWEF0itLoSw4LxnuvRENAP0.AgABAAQAAAAmoFfGtYxvRrNriQdPKIZ-AgDs_wUA9P-Nb1kGQLHYp4tJQN31crBAsj0uH8bk_laUeCWjNkhnRAOWDfROt5Q7UfRcwIVvdk304UrqG_x28w; buid=0.AQ0A6e9qkKd2ZU-4LV7CB3XVqnEiEWEF0itLoSw4LxnuvRENAP0.AQABAAEAAAAmoFfGtYxvRrNriQdPKIZ-zJJqrhc5QL2b89rfsgC0XTNoS_nkqvJNOkj_Jx-Fpl5XW2zFk_IMULGIOkdvmSmliqhqU02gtEBtqElnT4wYq9XyxI9Eyt35SC51f4SrWQa-f8xsrm8VVQ1lXGLREPWDXG9Z6717zTRTHeYCoX3rwyYUbi796MNmSItNduqiBEAgAA; CCState=RWhJS0VJYnBHc1VKM0JaT3RuaWhWaDlKb2EwPQ==; SignInStateCookie=CAgABAAIAAAAmoFfGtYxvRrNriQdPKIZ-AgDs_wUA9P_LbsXjYAchtqOBeVtcY4nwT1ZunHCwmz4QRVws9Y6qITPivndUHvR_nzkmuVTH4yAwZYTfq-ryhjGhy2e3b8aX_PEuAXNppe9R8dF5Valae71mHlIf5nIgV3c5MDDtTb2PJSTqWtww7x3-ZBN845Jxna-KxnhMMdffjnWxNKsUbpNjRt-gcyBgtrEKBHGJX7SAZq05XbwSvG71ntUNZALi-j8jc-mTGBHaKtqdazAx8u33m-bk2D8mlUJ7S_kVgBXodhDK; fpc=AjSlCzcC1jZDgTqNJiOueWr89QHrAQAAAA6C99wOAAAA-gaZUQEAAAAmgvfcDgAAAIPIgc4BAAAAN4L33A4AAAA"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "document"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "navigate"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "cross-site"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					}
+				],
+				"url": {
+					"raw": "https://login.microsoftonline.com/906aefe9-76a7-4f65-b82d-5ec20775d5aa/oauth2/v2.0/authorize?response_type=token&client_id=cbb476f1-e2e3-4b8e-a044-2722e9f37a7f&state=SjJvR1ZsSzN2QmlweXdzYTBNVjdLZk1mZEouQlpmNHpUUjdQNWhpSV9LQzRN&redirect_uri=https%3A%2F%2Fportal.ccp.comcast.com%2Fportal%2Fauth%2Fredirect&scope=openid%20api%3A%2F%2Fxcloud%2F.default&nonce=SjJvR1ZsSzN2QmlweXdzYTBNVjdLZk1mZEouQlpmNHpUUjdQNWhpSV9LQzRN",
+					"protocol": "https",
+					"host": [
+						"login",
+						"microsoftonline",
+						"com"
+					],
+					"path": [
+						"906aefe9-76a7-4f65-b82d-5ec20775d5aa",
+						"oauth2",
+						"v2.0",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "token"
+						},
+						{
+							"key": "client_id",
+							"value": "cbb476f1-e2e3-4b8e-a044-2722e9f37a7f"
+						},
+						{
+							"key": "state",
+							"value": "SjJvR1ZsSzN2QmlweXdzYTBNVjdLZk1mZEouQlpmNHpUUjdQNWhpSV9LQzRN"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https%3A%2F%2Fportal.ccp.comcast.com%2Fportal%2Fauth%2Fredirect"
+						},
+						{
+							"key": "scope",
+							"value": "openid%20api%3A%2F%2Fxcloud%2F.default"
+						},
+						{
+							"key": "nonce",
+							"value": "SjJvR1ZsSzN2QmlweXdzYTBNVjdLZk1mZEouQlpmNHpUUjdQNWhpSV9LQzRN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://katalon-demo-cura.herokuapp.com/authenticate.php?logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-IN,en;q=0.9,en-GB;q=0.8,en-US;q=0.7,ta;q=0.6"
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache"
+					},
+					{
+						"key": "Connection",
+						"value": "keep-alive"
+					},
+					{
+						"key": "Cookie",
+						"value": "PHPSESSID=9g6ro2a77u1pi9lrh6pc1vpcc3ntpfgr"
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "Referer",
+						"value": "https://katalon-demo-cura.herokuapp.com/appointment.php"
+					},
+					{
+						"key": "Sec-Fetch-Dest",
+						"value": "document"
+					},
+					{
+						"key": "Sec-Fetch-Mode",
+						"value": "navigate"
+					},
+					{
+						"key": "Sec-Fetch-Site",
+						"value": "same-origin"
+					},
+					{
+						"key": "Sec-Fetch-User",
+						"value": "?1"
+					},
+					{
+						"key": "Upgrade-Insecure-Requests",
+						"value": "1"
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\""
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?1"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Android\""
+					}
+				],
+				"url": {
+					"raw": "https://katalon-demo-cura.herokuapp.com/authenticate.php?logout",
+					"protocol": "https",
+					"host": [
+						"katalon-demo-cura",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"authenticate.php"
+					],
+					"query": [
+						{
+							"key": "logout",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "CalculatorSoapBaseUrl",
+			"value": "http://www.dneonline.com",
+			"type": "any"
+		},
+		{
+			"key": "CalculatorSoap12BaseUrl",
+			"value": "http://www.dneonline.com",
+			"type": "any"
+		}
+	]
+}
